@@ -1,0 +1,48 @@
+public class SesionInterfazList {
+
+    private void imprimirLista(List<String> lista){
+        for (i = 0 ; i < lista.size() ; i++){
+            
+            System.out.println("Imprimiendo Elementos ");
+            System.out.println(" ");
+            System.out.println(lista.get(i));
+            System.out.println("\n");
+
+        }
+    }
+
+        
+
+    static void main (string[] args) {
+        List<String> lista = new ArrayList<>();
+        lista.add("cadena 1");
+        lista.add("cadena 2");
+        lista.add("cadena 3");
+        lista.add("cadena 4");
+        lista.add("cadena 5");
+
+        for(int i = 0 ; i < lista.size; i++){
+            System.out.println(lista.get(i));
+            System.out.println("\n");
+        }
+
+        imprimirLista(lista);
+
+        lista.addFirst("String de prueba"); //Añadir uno al principio
+
+        imprimirLista(lista);
+
+        lista.set(3, "Cambiando Strings"); //Modificar el elemento 3
+
+        imprimirLista(lista);
+
+        lista.remove(5); //Elimina el elemEnto del indice
+
+        imprimirLista(lista);
+
+        lista.removeFirst();
+
+        imprimirLista(lista);
+
+    }
+}
