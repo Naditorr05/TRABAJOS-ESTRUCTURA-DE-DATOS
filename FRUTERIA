@@ -1,18 +1,26 @@
 package com.mycompany.fruteria;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.ListIterator;
 
 public class Fruteria {
 
     public static void main(String[] args) {
         //creacion de objetos
         List<String> nuevoinventario = new ArrayList<>();
+        
+        //Adicion de objetos
         nuevoinventario.add("Manzana");
         nuevoinventario.add("Naranja");
         nuevoinventario.add("Uva");
         
-        System.out.println(nuevoinventario);
+        //CREACION MEDIANTE LA CLASE ARRAY
+        String [] proveedores={"Manzaneria","Naranjeria","Don uvas"};
+        List <String> listaProveedores = Arrays.asList(proveedores);
+        
+        
       
     }
 }
