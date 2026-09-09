@@ -1,0 +1,18 @@
+package com.mycompany.fruteria;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Fruteria {
+
+    public static void main(String[] args) {
+        //creacion de objetos
+        List<String> nuevoinventario = new ArrayList<>();
+        nuevoinventario.add("Manzana");
+        nuevoinventario.add("Naranja");
+        nuevoinventario.add("Uva");
+        
+        System.out.println(nuevoinventario);
+      
+    }
+}
