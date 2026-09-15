@@ -9,4 +9,4 @@ for(int i=0 ; i<inventario.size ; i++){
 }
 
 String [] inventario2 = {"Mango", "Pera", "Fresa", "Uva"};
-inventario2.for.each(System.out::println);
+inventario2.forEach(System.out::println);
