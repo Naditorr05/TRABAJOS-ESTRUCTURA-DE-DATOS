@@ -48,7 +48,17 @@ public class ListasEnlazadas21sept {
         }
         
         //Consultar la posicion de base de datos
-        System.out.println("\nLA MATERIA PROGRAMACIÓN ESTA EN LA POSICION: " + materias.indexOf("Programacón"));
+        int posicion = materias.indexOf("Programación");
+        if (posicion != -1){
+            System.out.println("\nLA MATERIA PROGRAMACIÓN ESTA EN LA POSICION: " + posicion);
+        }
+        else {
+            System.out.println("\nLA MATERIA NO SE ENCUENTRA EN LA LISTA");
+        }
+        
+        //Modificar un elemento de la lista
+        materias.set(materias.indexOf("Matemáticas"), "Matematicas Aplicadas");
+        System.out.println("\nMATARIAS CON MATEMATICAS MODIFICADA" + materias);
         
     }
 }
