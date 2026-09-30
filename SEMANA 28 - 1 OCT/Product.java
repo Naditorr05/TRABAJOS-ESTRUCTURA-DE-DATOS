@@ -29,6 +29,10 @@ public class Product {
     public Product(int ID) {
         this.ID = ID;
     }
+    //Constructor vacio
+    public Product() {
+    }
+    
     
     //Getter and setter
     public int getID() {
@@ -81,6 +85,10 @@ public class Product {
         return Objects.equals(this.nombre, other.nombre);
     }
     
+    //Metodo mostrarInfo
+    public String mostrarInfo(){
+        return "El producto con ID "+ID+" llamado "+nombre+" tiene "+existence+" existencias con un valor de "+price;
+    }
     
     
 }
