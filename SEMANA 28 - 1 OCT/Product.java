@@ -11,6 +11,7 @@ public class Product {
     private String name;
     private int existence;
     private double price;
+    private String categoria;
 
     // Constructor para buscar por ID
     public Product(int ID) {
@@ -26,6 +27,15 @@ public class Product {
     }
 
     // GET: permiten consultar los datos
+    
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+    
     public int getID() {
         return ID;
     }
@@ -80,14 +90,11 @@ public class Product {
         return this.ID == other.ID;
     }
     // Permite mostrar los datos del producto
+
     @Override
     public String toString() {
-        return "Product{" +
-                "ID=" + ID +
-                ", name=" + name +
-                ", existence=" + existence +
-                ", price=" + price +
-                '}';
+        return "Product{" + "ID=" + ID + ", name=" + name + ", existence=" + existence + ", price=" + price + ", categoria=" + categoria + '}';
     }
+    
 
 }
