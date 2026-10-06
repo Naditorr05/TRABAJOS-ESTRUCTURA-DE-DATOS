@@ -1,167 +1,153 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ */
+
+package com.mycompany.inventoryapp;
+
 import java.util.Scanner;
 
 public class InventoryApp {
 
+    // Permite leer datos del usuario
+    private Scanner sc = new Scanner(System.in);
+
+    // Objeto que administra el inventario
+    private Inventory inventory;
+
+    // ============================================================
+    // MÉTODO PRINCIPAL
+    // ============================================================
+
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        // Crea un objeto de InventoryApp
+        InventoryApp app = new InventoryApp();
 
-        // Crear el inventario
-        Inventory inventario = new Inventory();
+        // Inicia el programa
+        app.init();
+    }
+    // INICIAR EL PROGRAMA
+    //==============================================
 
-        // Crear productos
-        Product producto1 = new Product(1, "Teclado", 80000);
-        Product producto2 = new Product(2, "Mouse", 45000);
-        Product producto3 = new Product(3, "Monitor", 650000);
-        Product producto4 = new Product(4, "Audífonos", 120000);
-        Product producto5 = new Product(5, "Memoria USB", 30000);
+    public void init() {
+        // Crea el inventario
+        inventory = new Inventory();
+        int op;
 
-        // Agregar productos al inventario
-        inventario.agregarProducto(producto1);
-        inventario.agregarProducto(producto2);
-        inventario.agregarProducto(producto3);
-
-        // Insertar un producto al inicio
-        inventario.agregarAlInicio(producto4);
-
-        // Insertar un producto al final
-        inventario.agregarProducto(producto5);
-
-        int opcion;
-
+        // Repite el menú hasta seleccionar 6
         do {
-            System.out.println();
-            System.out.println("Inventario de productos");
-            System.out.println("1. Mostrar productos");
-            System.out.println("2. Mostrar primer producto");
-            System.out.println("3. Mostrar último producto");
-            System.out.println("4. Consultar producto por posición");
-            System.out.println("5. Mostrar cantidad de productos");
-            System.out.println("6. Buscar producto");
-            System.out.println("7. Modificar producto");
-            System.out.println("8. Eliminar primer producto");
-            System.out.println("9. Eliminar último producto");
-            System.out.println("0. Salir");
-            System.out.print("Seleccione una opción: ");
+            System.out.println("\n\t MENU");
+            System.out.println("MANEJO DE INVENTARIOS     ");
+            System.out.println("1. Nuevo producto");
+            System.out.println("2. Agregar existencia");
+            System.out.println("3. Eliminar producto");
+            System.out.println("4. Actualizar precio");
+            System.out.println("5. Mostrar productos");
+            System.out.println("6. Salir");
+            System.out.println("Seleccione una opción:");
 
-            opcion = scanner.nextInt();
+            op = sc.nextInt();
 
-            switch (opcion) {
-
+            // Ejecuta la opción seleccionada
+            switch (op) {
                 case 1:
-                    System.out.println();
-                    System.out.println("Productos del inventario:");
-                    inventario.mostrarProductos();
+                    newProduct();
                     break;
 
                 case 2:
-                    System.out.println();
-                    System.out.println("Primer producto:");
-                    System.out.println(inventario.obtenerPrimero());
+                    addProduct();
                     break;
 
                 case 3:
-                    System.out.println();
-                    System.out.println("Último producto:");
-                    System.out.println(inventario.obtenerUltimo());
+                    deleteProduct();
                     break;
 
                 case 4:
-                    System.out.print("Ingrese la posición del producto: ");
-                    int posicion = scanner.nextInt();
-
-                    if (posicion >= 0 && posicion < inventario.cantidadProductos()) {
-                        System.out.println();
-                        System.out.println("Producto encontrado:");
-                        System.out.println(inventario.obtenerPorPosicion(posicion));
-                    } else {
-                        System.out.println("La posición no existe.");
-                    }
+                    updateProduct();
                     break;
 
                 case 5:
-                    System.out.println();
-                    System.out.println("Cantidad de productos: "
-                            + inventario.cantidadProductos());
-                    break;
-
-                case 6:
-                    System.out.print("Ingrese el código del producto: ");
-                    int codigo = scanner.nextInt();
-
-                    Product productoEncontrado = inventario.buscarProducto(codigo);
-
-                    if (productoEncontrado != null) {
-                        System.out.println();
-                        System.out.println("Producto encontrado:");
-                        System.out.println(productoEncontrado);
-                    } else {
-                        System.out.println("Producto no encontrado.");
-                    }
-                    break;
-
-                case 7:
-                    System.out.print("Ingrese el código del producto a modificar: ");
-                    int codigoModificar = scanner.nextInt();
-
-                    Product productoModificar =
-                            inventario.buscarProducto(codigoModificar);
-
-                    if (productoModificar != null) {
-
-                        scanner.nextLine();
-
-                        System.out.print("Ingrese el nuevo nombre: ");
-                        String nuevoNombre = scanner.nextLine();
-
-                        System.out.print("Ingrese el nuevo precio: ");
-                        double nuevoPrecio = scanner.nextDouble();
-
-                        productoModificar.setNombre(nuevoNombre);
-                        productoModificar.setPrecio(nuevoPrecio);
-
-                        System.out.println();
-                        System.out.println("Producto modificado:");
-                        System.out.println(productoModificar);
-
-                    } else {
-                        System.out.println("Producto no encontrado.");
-                    }
-                    break;
-
-                case 8:
-                    if (inventario.cantidadProductos() > 0) {
-                        Product eliminado = inventario.eliminarPrimero();
-
-                        System.out.println();
-                        System.out.println("Producto eliminado:");
-                        System.out.println(eliminado);
-                    } else {
-                        System.out.println("El inventario está vacío.");
-                    }
-                    break;
-
-                case 9:
-                    if (inventario.cantidadProductos() > 0) {
-                        Product eliminado = inventario.eliminarUltimo();
-
-                        System.out.println();
-                        System.out.println("Producto eliminado:");
-                        System.out.println(eliminado);
-                    } else {
-                        System.out.println("El inventario está vacío.");
-                    }
-                    break;
-
-                case 0:
-                    System.out.println();
-                    System.out.println("Programa finalizado.");
-                    break;
-
-                default:
-                    System.out.println("Opción no válida.");
+                    printProduct();
                     break;
             }
+
+        } while (op != 6);
+    }
+    // ================================================================
+    // OPCIÓN 1 - NUEVO PRODUCTO
+    // ================================================================
+
+    private void newProduct() {
+        System.out.println("ID del producto:");
+        int ID = sc.nextInt();
+
+        System.out.println("Nombre del producto:");
+        String name = sc.next();
+
+        System.out.println("Existencia inicial:");
+        int existence = sc.nextInt();
+
+        System.out.println("Precio del producto:");
+        double price = sc.nextDouble();
+
+        // Envía los datos a Inventory
+        inventory.newProduct(
+            ID, name, existence, price
+        );
+    }
+    // ============================================================
+    // OPCIÓN 2 - AGREGAR EXISTENCIA
+    // ============================================================
+
+    private void addProduct() {
+        System.out.println("ID del producto:");
+        int ID = sc.nextInt();
+
+        // Inventory aumenta la existencia
+        inventory.addProduct(ID);
+    }
+
+
+    // ============================================================
+    // OPCIÓN 3 - ELIMINAR PRODUCTO
+    // ============================================================
+
+    private void deleteProduct() {
+
+        System.out.println("ID del producto:");
+        int ID = sc.nextInt();
+
+        // Inventory elimina el producto
+        inventory.deleteProduct(ID);
+    }
+    // =====================================================
+    // OPCIÓN 4 - ACTUALIZAR PRECIO
+    // =====================================================
+
+    private void updateProduct() {
+
+        System.out.println("ID del producto:");
+        int ID = sc.nextInt();
+
+        System.out.println("Nuevo precio:");
+        double price = sc.nextDouble();
+
+        // Inventory modifica el precio
+        inventory.updateProduct(ID, price);
+    }
+
+
+    // =====================================================
+    // OPCIÓN 5 - MOSTRAR PRODUCTOS
+    // =====================================================
+
+    private void printProduct() {
+
+        // Inventory muestra la lista
+        inventory.printProducts();
+    }
+    
+}
 
         } while (opcion != 0);
 
