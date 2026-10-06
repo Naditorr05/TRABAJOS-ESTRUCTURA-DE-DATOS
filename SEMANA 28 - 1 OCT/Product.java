@@ -19,11 +19,12 @@ public class Product {
     }
 
     // Constructor para crear un producto completo
-    public Product(int ID, String name, int existence, double price) {
+    public Product(int ID, String name, int existence, double price, String categoria) {
         this.ID = ID;
         this.name = name;
         this.existence = existence;
         this.price = price;
+        this.categoria = categoria;
     }
 
     // GET: permiten consultar los datos
