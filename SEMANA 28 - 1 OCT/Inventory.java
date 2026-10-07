@@ -21,10 +21,10 @@ public class Inventory {
     // AGREGAR UN PRODUCTO NUEVO
     // =========================================================
 
-    public void newProduct(int ID, String name, int existence, double price) {
+    public void newProduct(int ID, String name, int existence, double price, String categoria) {
 
         // Crea un nuevo objeto Product
-        Product newProduct = new Product(ID, name, existence, price);
+        Product newProduct = new Product(ID, name, existence, price, categoria);
 
         // Agrega el producto a la lista
         boolean success = products.add(newProduct);
@@ -113,6 +113,12 @@ public class Inventory {
             System.out.println(
                 "El producto NO se eliminó");
         }
+    }
+    public void printCategoria(){
+        // Busca la posición usando el ID
+        int productIndex = products.indexOf(new Product(ID));
+        
+        System.out.println(Product.getCategoria());
     }
 
 
