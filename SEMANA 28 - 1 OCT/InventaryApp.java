@@ -69,6 +69,10 @@ public class InventoryApp {
                 case 5:
                     printProduct();
                     break;
+                
+                case 6:
+                    printCategoria();
+                    break;
             }
 
         } while (op != 6);
@@ -89,11 +93,13 @@ public class InventoryApp {
 
         System.out.println("Precio del producto:");
         double price = sc.nextDouble();
+        
+        System.out.println("Categoria del producto:");
+        String categoria = sc.next();
 
         // Envía los datos a Inventory
         inventory.newProduct(
-            ID, name, existence, price
-        );
+            ID, name, existence, price, categoria);
     }
     // ============================================================
     // OPCIÓN 2 - AGREGAR EXISTENCIA
@@ -147,10 +153,14 @@ public class InventoryApp {
         inventory.printProducts();
     }
     
-}
-
-        } while (opcion != 0);
-
-        scanner.close();
+    // =====================================================
+    // OPCIÓN 6 - MOSTRAR CATEGORIA DE PRODUCTOS
+    // =====================================================
+    
+    public void printCategoria(){
+        int ID = sc nextInt();
+        
+        System.out.println(inventory.getCategoria);
     }
+    
 }
