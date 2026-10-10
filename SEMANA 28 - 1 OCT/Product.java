@@ -1,25 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.mycompany.inventoryapp;
 
 public class Product {
 
-    // Atributos del producto
     private int ID;
     private String name;
     private int existence;
     private double price;
     private String categoria;
 
-    // Constructor para buscar por ID
+    // Constructor para buscar un producto por ID
     public Product(int ID) {
         this.ID = ID;
     }
 
     // Constructor para crear un producto completo
-    public Product(int ID, String name, int existence, double price, String categoria) {
+    public Product(int ID, String name, int existence,
+                   double price, String categoria) {
         this.ID = ID;
         this.name = name;
         this.existence = existence;
@@ -27,16 +24,8 @@ public class Product {
         this.categoria = categoria;
     }
 
-    // GET: permiten consultar los datos
-    
-    public String getCategoria() {
-        return categoria;
-    }
+    // GET: consultar los datos
 
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-    
     public int getID() {
         return ID;
     }
@@ -53,7 +42,12 @@ public class Product {
         return price;
     }
 
-    // SET: permiten modificar los datos
+    public String getCategoria() {
+        return categoria;
+    }
+
+    // SET: modificar los datos
+
     public void setID(int ID) {
         this.ID = ID;
     }
@@ -70,32 +64,34 @@ public class Product {
         this.price = price;
     }
 
-    // Compara dos productos por su ID
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    // Comparar productos por su ID
     @Override
     public boolean equals(Object obj) {
-
         if (this == obj) {
             return true;
         }
 
-        if (obj == null) {
-            return false;
-        }
-
-        if (getClass() != obj.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
 
         Product other = (Product) obj;
-
         return this.ID == other.ID;
     }
-    // Permite mostrar los datos del producto
 
+    // Mostrar todos los datos del producto
     @Override
     public String toString() {
-        return "Product{" + "ID=" + ID + ", name=" + name + ", existence=" + existence + ", price=" + price + ", categoria=" + categoria + '}';
+        return "Product{" +
+                "ID=" + ID +
+                ", name=" + name +
+                ", existence=" + existence +
+                ", price=" + price +
+                ", categoria=" + categoria +
+                '}';
     }
-    
-
 }
