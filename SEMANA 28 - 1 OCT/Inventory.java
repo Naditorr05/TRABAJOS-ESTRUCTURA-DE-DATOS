@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.mycompany.inventoryapp;
 
 import java.util.LinkedList;
@@ -9,117 +6,141 @@ import java.util.List;
 
 public class Inventory {
 
-    // Lista donde se guardan los productos
     private List<Product> products;
 
-    // Constructor: crea la lista vacía
+    // Constructor
     public Inventory() {
         products = new LinkedList<>();
     }
 
-    // =========================================================
-    // AGREGAR UN PRODUCTO NUEVO
-    // =========================================================
+    // Agregar un producto nuevo
+    public void newProduct(int ID, String name, int existence,
+                           double price, String categoria) {
 
-    public void newProduct(int ID, String name, int existence, double price, String categoria) {
-
-        // Crea un nuevo objeto Product
-        Product newProduct = new Product(ID, name, existence, price, categoria);
-
-        // Agrega el producto a la lista
-        boolean success = products.add(newProduct);
-
-        // Informa si se agregó correctamente
-        if (success) {
-            System.out.println(
-                "El producto " + name +
-                " se añadió satisfactoriamente"
-            );
-        } else {
-            System.out.println(
-                "Ocurrió un problema al agregar el producto"
-            );
+        // Evitar IDs duplicados
+        if (getProduct(ID) != null) {
+            System.out.println("Ya existe un producto con ese ID.");
+            return;
         }
-    }
-    // AUMENTAR LA EXISTENCIA DE UN PRODUCTO
-    // ======================================================
 
-    public void addProduct(int ID) {
-        // Busca la posición del producto por su ID
-        int productIndex = products.indexOf(new Product(ID));
+        Product newProduct = new Product(
+                ID, name, existence, price, categoria
+        );
 
-        // Obtiene el producto encontrado
-        Product product = products.get(productIndex);
-
-        // Consulta la existencia actual
-        int existenciaTemp = product.getExistence();
-
-        // Aumenta la existencia en una unidad
-        int newExistence = existenciaTemp + 1;
-
-        // Guarda la nueva existencia
-        product.setExistence(newExistence);
+        products.add(newProduct);
 
         System.out.println(
-            "\nSe agregó una unidad de "
-            + product.getName());
+                "El producto " + name + " se añadió satisfactoriamente."
+        );
     }
 
-    // ======================================================
-    // MOSTRAR TODOS LOS PRODUCTOS
-    // ======================================================
+    // Buscar un producto por su ID
+    public Product getProduct(int ID) {
+        int productIndex = products.indexOf(new Product(ID));
 
+        if (productIndex == -1) {
+            return null;
+        }
+
+        return products.get(productIndex);
+    }
+
+    // Consultar un producto por su ID
+    public void consultProduct(int ID) {
+        Product product = getProduct(ID);
+
+        if (product == null) {
+            System.out.println("El producto no existe.");
+        } else {
+            System.out.println("DATOS DEL PRODUCTO");
+            System.out.println(product);
+        }
+    }
+
+    // Agregar existencia
+    public void addProduct(int ID) {
+        Product product = getProduct(ID);
+
+        if (product == null) {
+            System.out.println("El producto no existe.");
+            return;
+        }
+
+        product.setExistence(product.getExistence() + 1);
+
+        System.out.println(
+                "Se agregó una unidad de " + product.getName()
+        );
+    }
+
+    // Mostrar todos los productos
     public void printProducts() {
         System.out.println("PRODUCTOS EN EL ALMACÉN");
 
-        // Recorre e imprime la lista
-        products.forEach(System.out::println);
+        if (products.isEmpty()) {
+            System.out.println("No hay productos registrados.");
+            return;
+        }
 
+        products.forEach(System.out::println);
         System.out.println();
     }
-    // ACTUALIZAR EL PRECIO
-    // =========================================================
+
+    // Actualizar el precio
     public void updateProduct(int ID, double price) {
-        // Busca la posición usando el ID
-        int productIndex = products.indexOf(new Product(ID));
+        Product product = getProduct(ID);
 
-        // Obtiene el producto encontrado
-        Product product = products.get(productIndex);
+        if (product == null) {
+            System.out.println("El producto no existe.");
+            return;
+        }
 
-        // Cambia el precio
         product.setPrice(price);
 
-        System.out.println(
-            "\nPrecio actualizado correctamente");
+        System.out.println("Precio actualizado correctamente.");
     }
 
+    // Actualizar la categoría
+    public void updateCategoria(int ID, String categoria) {
+        Product product = getProduct(ID);
 
-    // =========================================================
-    // ELIMINAR UN PRODUCTO
-    // =========================================================
-    public void deleteProduct(int ID) {
-        // Busca la posición usando el ID
-        int productIndex = products.indexOf(new Product(ID));
-
-        // Elimina y guarda el producto eliminado
-        Product deleteProduct = products.remove(productIndex);
-
-        // Verifica si se eliminó
-        if (deleteProduct != null) {
-            System.out.println(
-                "El producto " + deleteProduct +
-                " se eliminó");
-        } else {
-            System.out.println(
-                "El producto NO se eliminó");
+        if (product == null) {
+            System.out.println("El producto no existe.");
+            return;
         }
-    }
-    public void printCategoria(){
-        // Busca la posición usando el ID
-        int productIndex = products.indexOf(new Product(ID));
-        
-        System.out.println(Product.getCategoria());
+
+        product.setCategoria(categoria);
+
+        System.out.println("Categoría actualizada correctamente.");
     }
 
+    // Consultar la categoría
+    public void printCategoria(int ID) {
+        Product product = getProduct(ID);
 
+        if (product == null) {
+            System.out.println("El producto no existe.");
+            return;
+        }
+
+        System.out.println(
+                "Categoría del producto: " + product.getCategoria()
+        );
+    }
+
+    // Eliminar un producto
+    public void deleteProduct(int ID) {
+        Product product = getProduct(ID);
+
+        if (product == null) {
+            System.out.println("El producto no existe.");
+            return;
+        }
+
+        products.remove(product);
+
+        System.out.println(
+                "El producto " + product.getName() + " se eliminó."
+        );
+    }
 }
