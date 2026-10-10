@@ -1,6 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
 
 package com.mycompany.inventoryapp;
 
@@ -8,47 +5,34 @@ import java.util.Scanner;
 
 public class InventoryApp {
 
-    // Permite leer datos del usuario
     private Scanner sc = new Scanner(System.in);
-
-    // Objeto que administra el inventario
     private Inventory inventory;
 
-    // ============================================================
-    // MÉTODO PRINCIPAL
-    // ============================================================
-
     public static void main(String[] args) {
-
-        // Crea un objeto de InventoryApp
         InventoryApp app = new InventoryApp();
-
-        // Inicia el programa
         app.init();
     }
-    // INICIAR EL PROGRAMA
-    //==============================================
 
+    // Iniciar el programa
     public void init() {
-        // Crea el inventario
         inventory = new Inventory();
         int op;
 
-        // Repite el menú hasta seleccionar 6
         do {
-            System.out.println("\n\t MENU");
-            System.out.println("MANEJO DE INVENTARIOS     ");
+            System.out.println("\nMENU");
+            System.out.println("MANEJO DE INVENTARIOS");
             System.out.println("1. Nuevo producto");
             System.out.println("2. Agregar existencia");
             System.out.println("3. Eliminar producto");
             System.out.println("4. Actualizar precio");
             System.out.println("5. Mostrar productos");
-            System.out.println("6. Salir");
+            System.out.println("6. Consultar producto");
+            System.out.println("7. Actualizar categoría");
+            System.out.println("8. Salir");
             System.out.println("Seleccione una opción:");
 
             op = sc.nextInt();
 
-            // Ejecuta la opción seleccionada
             switch (op) {
                 case 1:
                     newProduct();
@@ -69,18 +53,29 @@ public class InventoryApp {
                 case 5:
                     printProduct();
                     break;
-                
+
                 case 6:
-                    printCategoria();
+                    consultProduct();
                     break;
+
+                case 7:
+                    updateCategoria();
+                    break;
+
+                case 8:
+                    System.out.println("Saliendo del programa...");
+                    break;
+
+                default:
+                    System.out.println("Opción no válida.");
             }
 
-        } while (op != 6);
-    }
-    // ================================================================
-    // OPCIÓN 1 - NUEVO PRODUCTO
-    // ================================================================
+        } while (op != 8);
 
+        sc.close();
+    }
+
+    // Opción 1: nuevo producto
     private void newProduct() {
         System.out.println("ID del producto:");
         int ID = sc.nextInt();
@@ -93,74 +88,63 @@ public class InventoryApp {
 
         System.out.println("Precio del producto:");
         double price = sc.nextDouble();
-        
-        System.out.println("Categoria del producto:");
+
+        System.out.println("Categoría del producto:");
         String categoria = sc.next();
 
-        // Envía los datos a Inventory
         inventory.newProduct(
-            ID, name, existence, price, categoria);
+                ID, name, existence, price, categoria
+        );
     }
-    // ============================================================
-    // OPCIÓN 2 - AGREGAR EXISTENCIA
-    // ============================================================
 
+    // Opción 2: agregar existencia
     private void addProduct() {
         System.out.println("ID del producto:");
         int ID = sc.nextInt();
 
-        // Inventory aumenta la existencia
         inventory.addProduct(ID);
     }
 
-
-    // ============================================================
-    // OPCIÓN 3 - ELIMINAR PRODUCTO
-    // ============================================================
-
+    // Opción 3: eliminar producto
     private void deleteProduct() {
-
         System.out.println("ID del producto:");
         int ID = sc.nextInt();
 
-        // Inventory elimina el producto
         inventory.deleteProduct(ID);
     }
-    // =====================================================
-    // OPCIÓN 4 - ACTUALIZAR PRECIO
-    // =====================================================
 
+    // Opción 4: actualizar precio
     private void updateProduct() {
-
         System.out.println("ID del producto:");
         int ID = sc.nextInt();
 
         System.out.println("Nuevo precio:");
         double price = sc.nextDouble();
 
-        // Inventory modifica el precio
         inventory.updateProduct(ID, price);
     }
 
-
-    // =====================================================
-    // OPCIÓN 5 - MOSTRAR PRODUCTOS
-    // =====================================================
-
+    // Opción 5: mostrar todos los productos
     private void printProduct() {
-
-        // Inventory muestra la lista
         inventory.printProducts();
     }
-    
-    // =====================================================
-    // OPCIÓN 6 - MOSTRAR CATEGORIA DE PRODUCTOS
-    // =====================================================
-    
-    public void printCategoria(){
-        int ID = sc nextInt();
-        
-        System.out.println(inventory.getCategoria);
+
+    // Opción 6: consultar producto por ID
+    private void consultProduct() {
+        System.out.println("Ingrese el ID del producto:");
+        int ID = sc.nextInt();
+
+        inventory.consultProduct(ID);
     }
-    
+
+    // Opción 7: actualizar categoría
+    private void updateCategoria() {
+        System.out.println("Ingrese el ID del producto:");
+        int ID = sc.nextInt();
+
+        System.out.println("Ingrese la nueva categoría:");
+        String categoria = sc.next();
+
+        inventory.updateCategoria(ID, categoria);
+    }
 }
